@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Election 2025 Dashboard</title>
+    <title>Election 2026 Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -444,9 +444,8 @@
         }
         
         .candidate-contact {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
+            display: flex;
+            justify-content: center;
             margin-bottom: 15px;
         }
         
@@ -463,17 +462,47 @@
             width: 20px;
         }
         
-        .info-section {
-            margin-bottom: 20px;
-            text-align: left;
+        /* Collapsible Sections */
+        .collapsible-section {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        .section-title {
+        .collapsible-header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .collapsible-header:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .collapsible-header h2 {
             font-size: 1.2rem;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #fdbb2d;
+            margin: 0;
             color: #fdbb2d;
+        }
+        
+        .collapsible-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible-content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .collapsible-content.active {
+            padding: 15px;
+            max-height: 1000px;
         }
         
         .info-grid {
@@ -518,6 +547,46 @@
             font-style: italic;
         }
         
+        /* Social Media Links Styles */
+        .social-media-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .social-media-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .social-link {
+            color: #fdbb2d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .social-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        .social-link i {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .info-value a.social-link {
+            opacity: 0.9;
+        }
+        
+        .info-value a.social-link:hover {
+            opacity: 1;
+        }
+        
         /* Mobile Navigation */
         .mobile-nav {
             position: fixed;
@@ -527,7 +596,7 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             padding: 10px 0;
             z-index: 1000;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -541,11 +610,9 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.7rem;
-            padding: 5px 10px;
+            padding: 5px 20px;
             border-radius: 10px;
             transition: all 0.3s ease;
-            flex: 1;
-            max-width: 25%;
         }
         
         .nav-item.active {
@@ -556,25 +623,6 @@
         .nav-item i {
             font-size: 1.2rem;
             margin-bottom: 3px;
-        }
-        
-        /* Swipe animation for page transitions */
-        .page.slide-left {
-            animation: slideLeft 0.3s ease;
-        }
-        
-        .page.slide-right {
-            animation: slideRight 0.3s ease;
-        }
-        
-        @keyframes slideLeft {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-        
-        @keyframes slideRight {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
         }
         
         /* Loading indicator */
@@ -641,13 +689,33 @@
                 min-height: 100vh;
             }
         }
+        /* Home Page Title Styles */
+        .home-title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+        
+        .home-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fdbb2d;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
         <!-- Header -->
         <div class="header">
-            <h1>Election DEC 2025</h1>
+            <h1>Mahindra Bank Election</h1>
             <p class="subtitle">Your Voice, Your Choice</p>
             <p class="date">Voting begins on December 7, 2025</p>
         </div>
@@ -656,6 +724,12 @@
         <div class="page-container">
             <!-- Home Page -->
             <div id="home-page" class="page active">
+                <!-- Home Page Title Section -->
+                <div class="home-title-section">
+                    <h2 class="home-title">Know Your Candidate</h2>
+                    <p class="home-subtitle">Explore candidate profiles and make an informed decision</p>
+                </div>
+                
                 <div class="panels-container">
                     <div class="panel" data-target="all-members-page">
                         <div class="icon">
@@ -781,84 +855,98 @@
                         <p class="candidate-role" id="candidateRole">Candidate Role</p>
                         
                         <div class="candidate-contact" id="candidateContact">
-                            <!-- Contact info will be inserted by JavaScript -->
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-users"></i>
-                            <span id="candidatePanel">Panel: </span>
+                            <!-- Only panel information will be inserted by JavaScript -->
                         </div>
                     </div>
                 </div>
 
-                <!-- Section A: Basic Details -->
-                <div class="info-section">
-                    <h2 class="section-title">Basic Details</h2>
-                    <div class="info-grid" id="basicDetails">
+                <!-- Collapsible Sections -->
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Basic Details</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="basicDetails">
                         <!-- Basic details will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section B: Current Role -->
-                <div class="info-section">
-                    <h2 class="section-title">Current Role</h2>
-                    <div class="info-grid" id="currentRole">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Current Role</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="currentRole">
                         <!-- Current role info will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section C: About Self -->
-                <div class="info-section">
-                    <h2 class="section-title">About Self</h2>
-                    <p style="opacity: 0.9; line-height: 1.6;" id="aboutSelf">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>About Me</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="aboutSelf">
                         <!-- About self content will be inserted by JavaScript -->
-                    </p>
+                    </div>
                 </div>
 
-                <!-- Section D: Role in the Bank -->
-                <div class="info-section">
-                    <h2 class="section-title">Role in the Bank</h2>
-                    <div class="info-grid" id="bankRole">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Previous Role in the Bank</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="bankRole">
                         <!-- Bank role info will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section E: Social & Community Associations -->
-                <div class="info-section">
-                    <h2 class="section-title">Social & Community Associations</h2>
-                    <div class="info-grid" id="communityAssociations">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Social & Community Associations</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="communityAssociations">
                         <!-- Community associations will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section F: Other Business Associations -->
-                <div class="info-section">
-                    <h2 class="section-title">Other Business Associations</h2>
-                    <div class="info-grid" id="businessAssociations">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Other Business Associations</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="businessAssociations">
                         <!-- Business associations will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section G: Key Achievements -->
-                <div class="info-section">
-                    <h2 class="section-title">Key Achievements</h2>
-                    <div style="opacity: 0.9; line-height: 1.6;" id="achievements">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Key Achievements</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="achievements">
                         <!-- Achievements will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section H: Vision for the Bank -->
-                <div class="info-section">
-                    <h2 class="section-title">Vision for the Bank</h2>
-                    <div class="vision-grid" id="vision">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Vision for the Bank</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="vision">
                         <!-- Vision content will be inserted by JavaScript -->
                     </div>
                 </div>
 
-                <!-- Section I: Appeal to Voters -->
-                <div class="info-section">
-                    <h2 class="section-title">Appeal to Voters</h2>
-                    <div class="appeal-message" id="appealMessage">
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <h2>Appeal to Voters</h2>
+                        <i class="fas fa-chevron-down collapsible-icon"></i>
+                    </div>
+                    <div class="collapsible-content" id="appealMessage">
                         <!-- Appeal message will be inserted by JavaScript -->
                     </div>
                 </div>
@@ -870,23 +958,11 @@
             <div class="loading-spinner"></div>
         </div>
 
-        <!-- Mobile Navigation -->
+        <!-- Mobile Navigation - Only Home Button -->
         <div class="mobile-nav">
             <a href="#" class="nav-item active" data-target="home-page">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
-            </a>
-            <a href="#" class="nav-item" data-target="all-members-page">
-                <i class="fas fa-users"></i>
-                <span>All Members</span>
-            </a>
-            <a href="#" class="nav-item" data-target="founder-panel-page">
-                <i class="fas fa-crown"></i>
-                <span>Founder</span>
-            </a>
-            <a href="#" class="nav-item" data-target="sansthapak-panel-page">
-                <i class="fas fa-flag"></i>
-                <span>Sansthapak</span>
             </a>
         </div>
     </div>
@@ -1103,7 +1179,7 @@
             }
         ];
 
-        // Candidate detailed information
+        // Candidate detailed information with direct URLs
         const candidateDetails = {
             "FP-001": {
                 name: "KAILASH NARAYAN BHANGADIYA",
@@ -1113,10 +1189,25 @@
                 basicDetails: {
                     age: "48",
                     gender: "Male",
-                    contact: "+91 XXXXX XXXXX",
                     email: "kailash.bhangadiya@email.com",
                     area: "Main Branch Area",
-                    socialMedia: "Instagram: @kailash_bhangadiya<br>Facebook: Kailash Bhangadiya<br>LinkedIn: Kailash Narayan Bhangadiya",
+                    socialMedia: [
+                        {
+                            platform: "Instagram",
+                            username: "@kailash_bhangadiya",
+                            url: "https://instagram.com/kailash_bhangadiya"
+                        },
+                        {
+                            platform: "Facebook",
+                            username: "Kailash Bhangadiya",
+                            url: "https://facebook.com/kailash.bhangadiya"
+                        },
+                        {
+                            platform: "LinkedIn",
+                            username: "Kailash Narayan Bhangadiya",
+                            url: "https://linkedin.com/in/kailash-bhangadiya"
+                        }
+                    ],
                     memberId: "MEM-2026-001"
                 },
                 currentRole: {
@@ -1172,10 +1263,25 @@
                 basicDetails: {
                     age: "52",
                     gender: "Male",
-                    contact: "+91 XXXXX XXXXX",
                     email: "murali.palod@email.com",
                     area: "Central Branch Area",
-                    socialMedia: "Instagram: @murali_palod<br>Facebook: Murali Palod<br>LinkedIn: Murali Manohar Palod",
+                    socialMedia: [
+                        {
+                            platform: "Instagram",
+                            username: "@murali_palod",
+                            url: "https://instagram.com/murali_palod"
+                        },
+                        {
+                            platform: "Facebook",
+                            username: "Murali Palod",
+                            url: "https://facebook.com/murali.palod"
+                        },
+                        {
+                            platform: "LinkedIn",
+                            username: "Murali Manohar Palod",
+                            url: "https://linkedin.com/in/murali-palod"
+                        }
+                    ],
                     memberId: "MEM-2026-015"
                 },
                 currentRole: {
@@ -1224,6 +1330,37 @@
                 appealMessage: "My fellow members, as your candidate from the Sansthapak Panel, I bring 25 years of financial expertise and a deep commitment to cooperative values. I promise to work tirelessly to ensure financial transparency, member empowerment, and sustainable growth. Together, we can build a stronger, more transparent cooperative that serves all members equally. Your trust is my responsibility."
             }
         };
+
+        // Function to toggle collapsible sections
+        function toggleCollapsible(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.collapsible-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Function to create clickable social media links
+        function createSocialMediaLinks(socialMediaArray) {
+            if (!socialMediaArray || !Array.isArray(socialMediaArray)) return '';
+            
+            let html = '';
+            
+            socialMediaArray.forEach(item => {
+                const platform = item.platform.toLowerCase();
+                html += `<div class="social-media-item">
+                    <i class="fab fa-${platform}"></i>
+                    <a href="${item.url}" target="_blank" class="social-link">${item.platform}: ${item.username}</a>
+                </div>`;
+            });
+            
+            return html;
+        }
 
         // Function to render members in a grid
         function renderMembers(members, containerId) {
@@ -1284,41 +1421,36 @@
             // Set basic info
             document.getElementById('candidateName').textContent = candidate.name;
             document.getElementById('candidateRole').textContent = candidate.role;
-            document.getElementById('candidatePanel').textContent = `Panel: ${candidate.panel}`;
 
-            // Set contact info
+            // Set contact info - ONLY PANEL INFORMATION
             const contactContainer = document.getElementById('candidateContact');
             contactContainer.innerHTML = `
                 <div class="contact-item">
-                    <i class="fas fa-user"></i>
-                    <span>Age: ${candidate.basicDetails.age}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-venus-mars"></i>
-                    <span>Gender: ${candidate.basicDetails.gender}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>${candidate.basicDetails.contact}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>${candidate.basicDetails.email}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>${candidate.basicDetails.area}</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-id-card"></i>
-                    <span>Member ID: ${candidate.basicDetails.memberId}</span>
+                    <i class="fas fa-users"></i>
+                    <span>Panel: ${candidate.panel}</span>
                 </div>
             `;
 
-            // Set basic details
+            // Set basic details - now includes age, gender, and email
             document.getElementById('basicDetails').innerHTML = `
+                <div class="info-label">Age:</div>
+                <div class="info-value">${candidate.basicDetails.age}</div>
+                <div class="info-label">Gender:</div>
+                <div class="info-value">${candidate.basicDetails.gender}</div>
+                <div class="info-label">Email:</div>
+                <div class="info-value">
+                    <a href="mailto:${candidate.basicDetails.email}" class="social-link">
+                        <i class="fas fa-envelope"></i> ${candidate.basicDetails.email}
+                    </a>
+                </div>
+                <div class="info-label">Area:</div>
+                <div class="info-value">${candidate.basicDetails.area}</div>
+                <div class="info-label">Member ID:</div>
+                <div class="info-value">${candidate.basicDetails.memberId}</div>
                 <div class="info-label">Social Media:</div>
-                <div class="info-value">${candidate.basicDetails.socialMedia}</div>
+                <div class="info-value social-media-links">
+                    ${createSocialMediaLinks(candidate.basicDetails.socialMedia)}
+                </div>
             `;
 
             // Set current role
@@ -1334,7 +1466,9 @@
             `;
 
             // Set about self
-            document.getElementById('aboutSelf').textContent = candidate.aboutSelf;
+            document.getElementById('aboutSelf').innerHTML = `
+                <p style="opacity: 0.9; line-height: 1.6;">${candidate.aboutSelf}</p>
+            `;
 
             // Set bank role
             document.getElementById('bankRole').innerHTML = `
@@ -1383,7 +1517,9 @@
             `).join('');
 
             // Set appeal message
-            document.getElementById('appealMessage').textContent = candidate.appealMessage;
+            document.getElementById('appealMessage').innerHTML = `
+                <div class="appeal-message">${candidate.appealMessage}</div>
+            `;
 
             // Show modal
             document.getElementById('candidateModal').style.display = 'block';
@@ -1408,11 +1544,13 @@
             setTimeout(() => {
                 document.getElementById(pageId).classList.add('active');
                 
-                // Update mobile navigation
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelector(`.nav-item[data-target="${pageId}"]`).classList.add('active');
+                // Update mobile navigation - only update if it's the home page
+                if (pageId === 'home-page') {
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    document.querySelector(`.nav-item[data-target="${pageId}"]`).classList.add('active');
+                }
                 
                 // Hide loading indicator
                 document.getElementById('loading').style.display = 'none';
@@ -1449,7 +1587,7 @@
                 });
             });
             
-            // Mobile navigation
+            // Mobile navigation - Only Home button
             document.querySelectorAll('.nav-item').forEach(navItem => {
                 navItem.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1504,6 +1642,4 @@
         });
     </script>
 </body>
-
 </html>
-
